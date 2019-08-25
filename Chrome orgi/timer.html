@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Timer</title>
+    </head>
+    <body>
+        <div 
+            <p id="timer">aa</p>
+        </div>
+        <div>
+            <button id="timerButton" onclick="toggleTimer()">Pause</button>
+        </div>
+        <script type="text/javascript">
+            var elapsedTime =0;
+            var timerRunning = true;
+            startTimer(3700);
+
+            function startTimer(initialTime) {
+                elapsedTime = initialTime - 1;
+                advanceTimer();        
+            };
+
+            function advanceTimer() {
+                if (timerRunning == true){
+                    elapsedTime++;
+                };
+                document.getElementById("timer").innerHTML = formatTime(elapsedTime);
+                setTimeout(advanceTimer, 1000);
+            };
+
+            function formatTime(seconds) {
+                var hours = "00" + Math.floor(seconds/3600)
+                hours = hours.substr(hours.length - 2, 2);
+                var remaining = seconds - (hours * 3600);
+                var minutes = "00" + Math.floor(remaining/60);
+                minutes = minutes.substr(minutes.length - 2, 2);
+                var seconds = "00" + (remaining - (minutes * 60));
+                seconds = seconds.substr(seconds.length - 2, 2);
+                var formattedTime = hours + ":" + minutes + ":" + seconds;
+                return formattedTime;
+                };
+
+            function toggleTimer() {
+                if (timerRunning == true) {
+                    timerRunning = false;
+                    document.getElementById("timerButton").innerHTML="Start";
+                } else {
+                    timerRunning= true;
+                    document.getElementById("timerButton").innerHTML="Pause";
+                }
+            };
+        </script>
+    </body>
+</html>
